@@ -24,7 +24,7 @@ function execSQL(conn,sqlQry,res)
     conn.request()
     .query(sqlQry)
     .then(result => console.log("Sucesso " + result))
-    .catch(err => console.log("Erro: " + err))       
+    .catch(err => console.log("Erro: " + err))
 }
 
 
@@ -33,7 +33,7 @@ router.post('/resultados',(req,res)=>
     const RA = parseInt(req.body.ra);
     const Cod =  parseInt(req.body.cod);
     const Nota = parseFloat(req.body.nota);
-    const Frequencia = parseFloat(req.body.frequencia);
+    const Frequencia = parseFloat(req.body.freq);
 
     execSQL(global.conn,"INSERT INTO RESULTADOS(RA,COD,NOTA,FREQUENCIA) VALUES("+RA + ","+Cod+","+Nota+","+Frequencia+")",res)
 
@@ -42,6 +42,6 @@ router.post('/resultados',(req,res)=>
 
 router.delete('/matriculas',(req,res)=>
 {
-    
+
 })
 
