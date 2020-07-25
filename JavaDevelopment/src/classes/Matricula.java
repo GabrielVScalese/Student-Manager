@@ -28,14 +28,14 @@ public class Matricula {
     }
 
     public void setNota(float nota) throws Exception {
-        if (nota < 0)
+        if (nota < 0 || nota > 10)
             throw new Exception("Nota invalida");
 
         this.nota = nota;
     }
 
     public void setFreq(float freq) throws Exception {
-        if (freq < 0)
+        if (freq < 0 || freq > 1)
             throw new Exception("Frequencia invalida");
 
         this.freq = freq;
