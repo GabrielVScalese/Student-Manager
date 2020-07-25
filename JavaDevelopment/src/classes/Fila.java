@@ -49,7 +49,7 @@ public class Fila<X> implements Cloneable
         if (i == null)
             throw new Exception ("Informacao ausente");
 
-        if (this.ultimo == null)
+        if (this.primeiro == null && this.ultimo == null)
         {
             No novo = new No (i);
             this.primeiro = novo;

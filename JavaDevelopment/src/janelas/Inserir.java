@@ -9,11 +9,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import classes.*;
 
 public class Inserir extends JFrame {
 
@@ -22,6 +24,8 @@ public class Inserir extends JFrame {
 	private JTextField txtCodDisciplina;
 	private JTextField txtNota;
 	private JTextField txtFrequencia;
+	
+	private Fila<Matricula> fila = new Fila<Matricula>();
 
 	/**
 	 * Launch the application.
@@ -37,6 +41,50 @@ public class Inserir extends JFrame {
 				}
 			}
 		});
+	}
+	
+	private void validarCampos() throws Exception
+	{
+		if(txtRA.getText().length() != 5)
+			throw new Exception("RA inválido");
+		try 
+		{
+			int r = Integer.parseInt(this.txtRA.getText());
+		}
+		catch(Exception e)
+		{
+			throw new Exception("RA inválido");
+		}
+		try 
+		{
+			int r = Integer.parseInt(this.txtCodDisciplina.getText());
+		}
+		catch(Exception e)
+		{
+			throw new Exception("Código de disciplina inválido");
+		}
+		try
+		{
+			float n = Float.parseFloat(txtNota.getText());
+		}
+		catch(Exception e)
+		{
+			throw new Exception("Nota inválida");
+		}
+		float nota = Float.parseFloat(txtNota.getText());
+		if(nota < 0 || nota > 10)
+			throw new Exception("Nota inválida");
+		try
+		{
+			float f = Float.parseFloat(txtFrequencia.getText());
+		}
+		catch(Exception e)
+		{
+			throw new Exception("Frequência inválida");
+		}
+		float freq = Float.parseFloat(txtFrequencia.getText());
+		if(freq < 0 || freq > 1)
+			throw new Exception("Frequência inválida");
 	}
 
 	/**
@@ -99,6 +147,25 @@ public class Inserir extends JFrame {
 		panel_1.setLayout(new GridLayout(1, 2, 0, 0));
 		
 		JButton btnInserir = new JButton("Inserir aluno");
+		btnInserir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try
+				{
+					validarCampos();
+					int ra = Integer.parseInt(txtRA.getText());
+					int cod = Integer.parseInt(txtCodDisciplina.getText());
+					float nota = Float.parseFloat(txtNota.getText());
+					float frequencia = Float.parseFloat(txtFrequencia.getText());
+					Matricula m = new Matricula(ra, cod, nota, frequencia);
+					fila.insira(m);
+				}
+				catch(Exception err)
+				{
+					JOptionPane.showMessageDialog(null, err);
+				}
+			}
+		});
 		btnInserir.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		panel_1.add(btnInserir);
 		
