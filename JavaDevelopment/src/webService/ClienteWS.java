@@ -96,7 +96,6 @@ public class ClienteWS
         //return objetoRetorno;
     }
 
-
     public static String inputStreamToString (InputStream is) throws IOException
     {
         if (is != null)
