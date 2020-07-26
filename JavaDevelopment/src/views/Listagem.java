@@ -1,4 +1,4 @@
-package janelas;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import classes.Fila;
-import classes.Matricula;
+import models.Fila;
+import models.Matricula;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -17,10 +17,12 @@ import java.util.ArrayList;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
 
 public class Listagem extends JFrame {
 
 	private JPanel contentPane;
+	private JScrollPane scrollPane;
 	private static JTable table;
 
 	/**
@@ -83,20 +85,11 @@ public class Listagem extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		
+		scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"New column", "New column"
-			}
-		));
-		contentPane.add(table, BorderLayout.CENTER);
+		scrollPane.setViewportView(table);
 	}
 
 }

@@ -1,4 +1,4 @@
-package janelas;
+package views;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 

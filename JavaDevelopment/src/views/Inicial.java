@@ -1,4 +1,4 @@
-package janelas;
+package views;
 
 import java.awt.EventQueue;
 

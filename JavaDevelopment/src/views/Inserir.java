@@ -1,4 +1,4 @@
-package janelas;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -15,7 +15,7 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import classes.*;
+import models.*;
 import webService.ClienteWS;
 
 public class Inserir extends JFrame {
