@@ -134,12 +134,17 @@ public class Fila<X> implements Cloneable
 
     public void removaDoInicio () throws Exception
     {
-        if (this.ultimo == null && this.primeiro == null)
-            throw new Exception ("Lista esta vazia");
+    	if (this.primeiro==null /*&& this.ultimo==null*/)
+            throw new Exception ("Nada a remover");
 
-        No aux = this.primeiro.getProx();
-        this.primeiro = null;
-        this.primeiro = aux;
+        if (this.primeiro==this.ultimo) //so 1 elemento
+        {
+            this.primeiro=null;
+            this.ultimo  =null;
+            return;
+        }
+
+        this.primeiro = this.primeiro.getProx();
     }
 
     public boolean tem (X i) throws Exception
@@ -201,6 +206,18 @@ public class Fila<X> implements Cloneable
     public Fila()
     {}
 
+   
+    public X getSemRemover()
+    {
+    	if (isVazia())
+            return null;
+    	
+        if (this.primeiro.getInfo() instanceof Cloneable)
+            return meuCloneDeX(this.primeiro.getInfo());
+        else
+           return this.primeiro.getInfo();
+    }
+    
     public X getInfo() throws Exception
     {
         if (this.ultimo == null && this.primeiro == null)
@@ -222,6 +239,7 @@ public class Fila<X> implements Cloneable
 
     public boolean isVazia()
     {
+    	System.out.println(this.primeiro);
         if (this.ultimo == null && this.primeiro == null)
             return true;
         else
