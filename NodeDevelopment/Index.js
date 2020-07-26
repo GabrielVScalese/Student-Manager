@@ -37,6 +37,7 @@ router.post('/resultados',(req,res)=>
 
     execSQL(global.conn,"INSERT INTO RESULTADOS(RA,COD,NOTA,FREQUENCIA) VALUES("+RA + ","+Cod+","+Nota+","+Frequencia+")",res)
 
+    return res.json();
 })
 
 
