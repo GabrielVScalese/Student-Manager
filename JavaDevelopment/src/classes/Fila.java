@@ -239,7 +239,6 @@ public class Fila<X> implements Cloneable
 
     public boolean isVazia()
     {
-    	System.out.println(this.primeiro);
         if (this.ultimo == null && this.primeiro == null)
             return true;
         else

@@ -12,6 +12,12 @@ public class Matricula {
         setNota(nota);
         setFreq(freq);
     }
+    
+    public Matricula (int ra, int cod) throws Exception 
+    {
+    	setRa(ra);
+    	setCod(cod);
+    }
 
     public void setRa(int ra) throws Exception {
         if (ra < 0)
