@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Listagem extends JFrame {
 
@@ -55,7 +56,7 @@ public class Listagem extends JFrame {
            
             ModeloTabela modTab = new ModeloTabela(dados,colunas);
 
-            table.setModel(modTab);//Criamos a tabela
+            table.setModel(modTab);
             table.getColumnModel().getColumn(0).setPreferredWidth(210);
             table.getColumnModel().getColumn(0).setResizable(false);
             table.getColumnModel().getColumn(1).setPreferredWidth(211);
@@ -83,6 +84,18 @@ public class Listagem extends JFrame {
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
 		
 		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+			},
+			new String[] {
+				"New column", "New column"
+			}
+		));
 		contentPane.add(table, BorderLayout.CENTER);
 	}
 

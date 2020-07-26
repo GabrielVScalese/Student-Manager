@@ -180,7 +180,7 @@ public class Inserir extends JFrame {
 				{
 					do
 					{
-						cws.postObjeto(fila.getInfo(), null, "http://localhost:3000/resultados");
+						ClienteWS.postObjeto(fila.getInfo(), null, "http://localhost:3000/resultados");
 					}
 					while(!fila.isVazia());
 				}
@@ -188,7 +188,7 @@ public class Inserir extends JFrame {
 				{
 					err.printStackTrace();
 				}
-				System.out.println("a");
+				
 				Listagem l = new Listagem();
 				l.setVisible(true);
 				l.preencherTabela(filaClone);
