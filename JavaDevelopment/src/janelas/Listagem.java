@@ -6,15 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import classes.Fila;
+import classes.Matricula;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.util.ArrayList;
+
 import javax.swing.JTable;
 
 public class Listagem extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table;
+	private static JTable table;
 
 	/**
 	 * Launch the application.
@@ -31,6 +37,34 @@ public class Listagem extends JFrame {
 			}
 		});
 	}
+	
+	public static void preencherTabela(Fila<Matricula> fila) 
+	{
+
+        String [] colunas = {"RA","Código da discplina", "Nota", "Frequência"};
+        try 
+        {
+            ArrayList dados = new ArrayList();
+           
+            do 
+            {
+            	dados.add(new Object[] {fila.getSemRemover().getRa(), fila.getSemRemover().getCod(), fila.getSemRemover().getNota(), fila.getSemRemover().getFreq()});
+            	fila.removaDoInicio();
+            }
+            while (!fila.isVazia());
+           
+            ModeloTabela modTab = new ModeloTabela(dados,colunas);
+
+            table.setModel(modTab);//Criamos a tabela
+            table.getColumnModel().getColumn(0).setPreferredWidth(210);
+            table.getColumnModel().getColumn(0).setResizable(false);
+            table.getColumnModel().getColumn(1).setPreferredWidth(211);
+            table.getColumnModel().getColumn(1).setResizable(false);
+            table.getTableHeader().setReorderingAllowed(false);
+        }
+        catch(Exception erro)
+        {}
+    }
 
 	/**
 	 * Create the frame.

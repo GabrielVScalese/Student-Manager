@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import classes.*;
+import webService.ClienteWS;
 
 public class Inserir extends JFrame {
 
@@ -26,6 +27,7 @@ public class Inserir extends JFrame {
 	private JTextField txtFrequencia;
 	
 	private Fila<Matricula> fila = new Fila<Matricula>();
+	private ClienteWS cws;
 
 	/**
 	 * Launch the application.
@@ -173,8 +175,23 @@ public class Inserir extends JFrame {
 		btnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				Fila filaClone = (Fila) fila.clone();
+				try
+				{
+					do
+					{
+						cws.postObjeto(fila.getInfo(), null, "http://localhost:3000/resultados");
+					}
+					while(!fila.isVazia());
+				}
+				catch (Exception err)
+				{
+					err.printStackTrace();
+				}
+				System.out.println("a");
 				Listagem l = new Listagem();
 				l.setVisible(true);
+				l.preencherTabela(filaClone);
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
