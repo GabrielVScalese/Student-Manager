@@ -44,6 +44,7 @@ public class ClienteWS
             connection.connect();
 
             String responseJson = inputStreamToString(connection.getInputStream());
+            System.out.println(responseJson);
             connection.disconnect();
 		
             return fromJson(responseJson, tipoObjetoRetorno);
@@ -54,7 +55,7 @@ public class ClienteWS
         }
     }
 
-    public static void postObjeto (Object objetoEnvio,
+    public static Object postObjeto (Object objetoEnvio,
                                      Class tipoObjetoRetorno,
                                      String urlWebService)
     {
@@ -86,14 +87,14 @@ public class ClienteWS
 
             String responseJson = inputStreamToString (connection.getInputStream());
             connection.disconnect();
-            //objetoRetorno = fromJson (responseJson, tipoObjetoRetorno);
+            objetoRetorno = fromJson (responseJson, tipoObjetoRetorno);
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
 
-        //return objetoRetorno;
+        return objetoRetorno;
     }
 
     public static String inputStreamToString (InputStream is) throws IOException
