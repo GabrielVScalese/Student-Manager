@@ -161,6 +161,7 @@ public class Inserir extends JFrame {
 					float frequencia = Float.parseFloat(txtFrequencia.getText());
 					Matricula m = new Matricula(ra, cod, nota, frequencia);
 					fila.insira(m);
+					JOptionPane.showMessageDialog(null, "Aluno incluído na fila");
 				}
 				catch(Exception err)
 				{
@@ -175,32 +176,32 @@ public class Inserir extends JFrame {
 		btnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int response = 0;
-								System.out.println(fila);
-								Fila filaClone = (Fila) fila.clone();
-								try
-								{
-									do
-									{
-										response = (Integer)ClienteWS.postObjeto(fila.getInfo(), Integer.class, "http://localhost:3000/resultados");
-										System.out.println(response);
-										if (response == 404)
-										{
-											JOptionPane.showMessageDialog(null,"Falha na operação");
-										}
-									}
-									while(!fila.isVazia());
-								}
-								catch (Exception err)
-								{
-									JOptionPane.showMessageDialog(null, err);
-								}
-								if (response == 200)
-								{
-									Listagem l = new Listagem();
-									l.setVisible(true);
-									l.preencherTabela(filaClone);
+		       int response = 0;
+			   System.out.println(fila);
+			   Fila filaClone = (Fila) fila.clone();
+			   try
+				{
+					do
+					{
+						response = (Integer)ClienteWS.postObjeto(fila.getInfo(), Integer.class, "http://localhost:3000/resultados");
+						System.out.println(response);
+						if (response == 404)
+						{
+							JOptionPane.showMessageDialog(null,"Falha na operação");
+						}
+					}
+					while(!fila.isVazia());
 				}
+				catch (Exception err)
+				{
+					JOptionPane.showMessageDialog(null, err);
+				}
+				if (response == 200)
+				{
+					Listagem l = new Listagem();
+					l.setVisible(true);
+					l.preencherTabela(filaClone);
+                }
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
