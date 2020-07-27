@@ -42,7 +42,7 @@ router.post("/resultados", async (req, res) => {
   );
   const existsMatricula = await execSQL(
     global.conn,
-    "SELECT * FROM MATRICULAS WHERE RA=" + RA
+    "SELECT * FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod
   );
 
   if (existsAluno.recordset.length == 0) {
