@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import models.Fila;
-import models.Matricula;
+import models.Resultados;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -41,18 +41,19 @@ public class Listagem extends JFrame {
 		});
 	}
 	
-	public static void preencherTabela(Fila<Matricula> fila) 
+	public static void preencherTabela(Fila<Resultados> fila, Fila<String> inserido) 
 	{
 
-        String [] colunas = {"RA","Código da discplina", "Nota", "Frequência"};
+        String [] colunas = {"RA","Código da discplina", "Nota", "Frequência", "Inserido"};
         try 
         {
             ArrayList dados = new ArrayList();
            
             do 
             {
-            	dados.add(new Object[] {fila.getSemRemover().getRa(), fila.getSemRemover().getCod(), fila.getSemRemover().getNota(), fila.getSemRemover().getFreq()});
+            	dados.add(new Object[] {fila.getSemRemover().getRa(), fila.getSemRemover().getCod(), fila.getSemRemover().getNota(), fila.getSemRemover().getFreq(), inserido.getSemRemover()});
             	fila.removaDoInicio();
+            	inserido.removaDoInicio();
             }
             while (!fila.isVazia());
            
@@ -66,7 +67,9 @@ public class Listagem extends JFrame {
             table.getTableHeader().setReorderingAllowed(false);
         }
         catch(Exception erro)
-        {}
+        {
+        	System.out.println(erro.getMessage());
+        }
     }
 
 	/**

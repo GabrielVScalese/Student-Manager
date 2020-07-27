@@ -26,7 +26,7 @@ public class Inserir extends JFrame {
 	private JTextField txtNota;
 	private JTextField txtFrequencia;
 
-	private Fila<Matricula> fila = new Fila<Matricula>();
+	private Fila<Resultados> fila = new Fila<Resultados>();
 	private ClienteWS cws;
 
 	/**
@@ -159,7 +159,7 @@ public class Inserir extends JFrame {
 					int cod = Integer.parseInt(txtCodDisciplina.getText());
 					float nota = Float.parseFloat(txtNota.getText());
 					float frequencia = Float.parseFloat(txtFrequencia.getText());
-					Matricula m = new Matricula(ra, cod, nota, frequencia);
+					Resultados m = new Resultados(ra, cod, nota, frequencia);
 					fila.insira(m);
 					JOptionPane.showMessageDialog(null, "Aluno incluído na fila");
 				}
@@ -176,19 +176,18 @@ public class Inserir extends JFrame {
 		btnSalvar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+		       Fila<String> inserido = new Fila<String>();
 		       int response = 0;
-			   System.out.println(fila);
 			   Fila filaClone = (Fila) fila.clone();
 			   try
 				{
 					do
 					{
 						response = (Integer)ClienteWS.postObjeto(fila.getInfo(), Integer.class, "http://localhost:3000/resultados");
-						System.out.println(response);
 						if (response == 404)
-						{
-							JOptionPane.showMessageDialog(null,"Falha na operação");
-						}
+						    inserido.insira("Não");
+						if (response == 200)
+							inserido.insira("Sim");
 					}
 					while(!fila.isVazia());
 				}
@@ -196,12 +195,13 @@ public class Inserir extends JFrame {
 				{
 					JOptionPane.showMessageDialog(null, err);
 				}
-				if (response == 200)
-				{
-					Listagem l = new Listagem();
+			    
+			    if (!filaClone.isVazia())
+			    {
+			    	Listagem l = new Listagem();
 					l.setVisible(true);
-					l.preencherTabela(filaClone);
-                }
+					l.preencherTabela(filaClone, inserido);
+			    }
 			}
 		});
 		btnSalvar.setFont(new Font("Tahoma", Font.PLAIN, 20));
