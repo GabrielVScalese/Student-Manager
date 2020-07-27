@@ -66,7 +66,7 @@ router.post("/resultados", async (req, res) => {
       res
     );
 
-    execSQL(global.conn, "DELETE FROM MATRICULAS WHERE RA=" + RA);
+    execSQL(global.conn, "DELETE FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod);
 
     return res.json(200);
   }
