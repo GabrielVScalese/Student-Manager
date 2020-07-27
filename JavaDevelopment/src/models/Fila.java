@@ -134,10 +134,10 @@ public class Fila<X> implements Cloneable
 
     public void removaDoInicio () throws Exception
     {
-    	if (this.primeiro==null /*&& this.ultimo==null*/)
+    	if (this.primeiro == null)
             throw new Exception ("Nada a remover");
 
-        if (this.primeiro==this.ultimo) //so 1 elemento
+        if (this.primeiro==this.ultimo)
         {
             this.primeiro=null;
             this.ultimo  =null;
@@ -185,7 +185,7 @@ public class Fila<X> implements Cloneable
         return ret;
     }
 
-    public Fila(Fila<X> modelo) throws Exception // refatorar
+    public Fila(Fila<X> modelo) throws Exception
     {
         if (modelo == null)
             throw new Exception ("Modelo ausente");
@@ -212,10 +212,7 @@ public class Fila<X> implements Cloneable
     	if (isVazia())
             return null;
     	
-        if (this.primeiro.getInfo() instanceof Cloneable)
-            return meuCloneDeX(this.primeiro.getInfo());
-        else
-           return this.primeiro.getInfo();
+        return this.primeiro.getInfo();
     }
     
     public X getInfo() throws Exception
@@ -225,16 +222,8 @@ public class Fila<X> implements Cloneable
 
         No aux = new No (this.primeiro.getInfo(), this.primeiro.getProx());
 
-        if (this.primeiro.getInfo() instanceof Cloneable)
-        {
-            removaDoInicio();
-            return meuCloneDeX(aux.getInfo());
-        }
-        else
-        {
-            removaDoInicio();
-            return aux.getInfo();
-        }
+        removaDoInicio();
+        return aux.getInfo();
     }
 
     public boolean isVazia()
