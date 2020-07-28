@@ -193,7 +193,7 @@ public class Inserir extends JFrame {
 				}
 				catch (Exception err)
 				{
-					JOptionPane.showMessageDialog(null, err);
+					JOptionPane.showMessageDialog(null, "Fila está vazia");
 				}
 			    
 			    if (!filaClone.isVazia())
