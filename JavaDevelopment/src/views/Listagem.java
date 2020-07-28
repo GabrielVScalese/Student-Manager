@@ -51,9 +51,8 @@ public class Listagem extends JFrame {
            
             do 
             {
-            	dados.add(new Object[] {fila.getSemRemover().getRa(), fila.getSemRemover().getCod(), fila.getSemRemover().getNota(), fila.getSemRemover().getFreq(), inserido.getSemRemover()});
-            	fila.removaDoInicio();
-            	inserido.removaDoInicio();
+            	Resultados res = fila.getInfo();
+            	dados.add(new Object[] {res.getRa(), res.getCod(), res.getNota(), res.getFreq(), inserido.getInfo()});
             }
             while (!fila.isVazia());
            
