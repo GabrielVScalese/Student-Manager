@@ -297,17 +297,6 @@ public class Fila<X> implements Cloneable
     public Fila()
     {}
 
-   /**
-    * Retorna o elemento no início da fila mas sem remover
-    * @return o primeiro elemento caso a fila não esteja vazia, se estiver retorna null
-    */
-    public X getSemRemover()
-    {
-    	if (isVazia())
-            return null;
-    	
-        return this.primeiro.getInfo();
-    }
     /**
      * Retorna o primeiro elemento da fila,removendo-o no processo
      * @return o elemento no início da fila
