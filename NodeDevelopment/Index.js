@@ -35,17 +35,12 @@ router.post("/resultados", async (req, res) => {
   const Nota = parseFloat(req.body.nota);
   const Frequencia = parseFloat(req.body.freq);
 
-  const existsAluno = await execSQL(
-    global.conn,
-    "SELECT * FROM ALUNOS WHERE RA =" + RA
-  );
+  const existsAluno = await execSQL("SELECT * FROM ALUNOS WHERE RA =" + RA);
 
   const existsDisciplina = await execSQL(
-    global.conn,
     "SELECT * FROM DISCIPLINAS WHERE COD=" + Cod
   );
   const existsMatricula = await execSQL(
-    global.conn,
     "SELECT * FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod
   );
 
