@@ -21,8 +21,12 @@ app.use("/", router);
 app.listen(port);
 console.log("O servidor está ativo!");
 
-async function execSQL(conn, sqlQry) {
-  return await conn.request().query(sqlQry);
+async function execSQL(sqlQry) {
+  try {
+    return await global.conn.request().query(sqlQry);
+  } catch (err) {
+    console.log("Erro: " + err);
+  }
 }
 
 router.post("/resultados", async (req, res) => {
@@ -66,7 +70,10 @@ router.post("/resultados", async (req, res) => {
       res
     );
 
-    execSQL(global.conn, "DELETE FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod);
+    execSQL(
+      global.conn,
+      "DELETE FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod
+    );
 
     return res.json(200);
   }
