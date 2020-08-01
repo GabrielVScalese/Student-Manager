@@ -66,14 +66,10 @@ router.post("/resultados", async (req, res) => {
         Nota +
         "," +
         Frequencia +
-        ")",
-      res
+        ")"
     );
 
-    execSQL(
-      global.conn,
-      "DELETE FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod
-    );
+    execSQL("DELETE FROM MATRICULAS WHERE RA=" + RA + "AND COD=" + Cod);
 
     return res.json(200);
   }
